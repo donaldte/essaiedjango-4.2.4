@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} home  {% endblock title %}
+
+{% block content %}
+{% include 'navbar.html' %}
+<h1> home page</h1>
+
+<center>{{ liste }}</center>
+
+{{ user }}
+
+{% include 'section_home.html' %}
+
+{% endblock content %}
