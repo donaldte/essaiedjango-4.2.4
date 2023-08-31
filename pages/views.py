@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .forms import ProduitForm
 from produits.models import Produit
 # Create your views here.
 def product_detail_view(request):
@@ -9,6 +9,23 @@ def product_detail_view(request):
         'objects': obj 
     }
     return render(request, 'produit/detail.html', context)
+
+
+def product_create_view(request):
+    form = ProduitForm(request.POST or None)
+    message = ''
+    if form.is_valid():
+        form.save()
+        message = 'le produit a été bien enregistré'
+        form = ProduitForm()
+        
+    context = {
+        'form': form,
+        'message': message
+    }    
+    
+    return render(request, 'produit/create.html', context)    
+    
 
 
 def home_view(request, *args, **kwargs): #args, kwargs
