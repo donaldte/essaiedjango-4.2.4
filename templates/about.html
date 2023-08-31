@@ -2,5 +2,13 @@
 {% block title %} about {% endblock title %}
 
 {% block content %}
-<h1> about page </h1>
+{% comment %} <h1> about page </h1> {% endcomment %}
+
+<h3> {{ title|capfirst|upper|cut:'U' }} </h3>
+
+{% for nombre in liste_numbre %}
+<li> {{ nombre|add:100 }} </li>
+{% endfor %}
+
+<h1>{{html|striptags  }}</h1>
 {% endblock content %}
