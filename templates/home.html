@@ -4,12 +4,34 @@
 
 {% block content %}
 {% include 'navbar.html' %}
-<h1> home page</h1>
 
-<center>{{ liste }}</center>
+<h1> home page </h1>
 
-{{ user }}
+
+{% if liste  %}
+<center>
+    {% for i in liste %}
+    <li>
+       {{ forloop.counter }} - {{i}}
+    </li>
+    {% empty %}
+    <li> liste vide </li>
+    {% endfor %}
+</center>
+
+{% endif %}
+
+{% if request.user.is_authenticated %}
+<h1> hello {{ request.user.username }} </h1>
+
+{% else %} 
+
+<h1> hello guest </h1>
+
+{% endif %}
+
+
 
 {% include 'section_home.html' %}
-
+<h1> home page </h1>
 {% endblock content %}

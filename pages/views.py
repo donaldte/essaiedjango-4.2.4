@@ -4,17 +4,15 @@ from django.http import HttpResponse
 # Create your views here.
 
 def home_view(request, *args, **kwargs): #args, kwargs
-    liste  = [3,4,5,6,7,7]
+    liste  = ['son', 'maman', 'papa', 'frere', 'soeur']
     
     user = request.user 
+    print(user)
     context = {
-        "liste": liste
+        "liste": liste,
+        'user': user
     }
-    if user.is_authenticated:
-        context['user'] = user.username
-        
-    else:
-        context['user'] = "Pas connecté"
+    
         
     return render(request, "home.html", context)
 
