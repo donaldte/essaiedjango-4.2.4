@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .forms import ProduitForm
+from .forms import ProduitForm, PureProduitForm
 from produits.models import Produit
 # Create your views here.
 def product_detail_view(request):
@@ -11,21 +11,44 @@ def product_detail_view(request):
     return render(request, 'produit/detail.html', context)
 
 
-def product_create_view(request):
-    form = ProduitForm(request.POST or None)
-    message = ''
-    if form.is_valid():
-        form.save()
-        message = 'le produit a été bien enregistré'
-        form = ProduitForm()
+# def product_create_view(request):
+#     form = ProduitForm(request.POST or None)
+#     message = ''
+#     if form.is_valid():
+#         form.save()
+#         message = 'le produit a été bien enregistré'
+#         form = ProduitForm()
         
-    context = {
-        'form': form,
-        'message': message
-    }    
+#     context = {
+#         'form': form,
+#         'message': message
+#     }    
     
-    return render(request, 'produit/create.html', context)    
+#     return render(request, 'produit/create.html', context)    
     
+# def product_create_view(request):
+#     message = ''
+#     if request.method =='POST':
+#         data = request.POST 
+#         nom = data.get('nom') # nom = request.POST.get('nom')
+#         prix = data.get('prix')
+    
+#         description = data.get('description')
+    
+#         Produit.objects.create(nom=nom, prix=prix, description=description)
+#         message = 'produit cree avec success'
+#     return render(request, 'produit/create.html', {'message': message})
+
+
+def product_create_view(request, *args, **kwargs):
+    message = ''
+    form = PureProduitForm(request.POST or None)
+    if form.is_valid():
+        data = form.cleaned_data
+        Produit.objects.create(**data)
+        message = 'donnee enregistrees '
+        form = PureProduitForm()
+    return render(request, 'produit/create.html', {'message': message, 'form': form})
 
 
 def home_view(request, *args, **kwargs): #args, kwargs

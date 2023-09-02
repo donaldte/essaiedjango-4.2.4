@@ -4,10 +4,16 @@
     <h1> Welcome to the Create product page!</h1>
     <h1 style="color:green;"> {{message}}</h1>
 
-    <form method="post">
-        {% csrf_token %}
+
+    <form method="post" action="."> {% csrf_token %}
+        <!-- <input type="text" name="nom" placeholder="Nom du produit"><br><br>
+        <input type="int" name="prix" placeholder="Prix du produit" ><br><br>
+        <textarea name="description" placeholder="description du produit" cols="30" rows="10"></textarea><br><br> -->
+
         {{ form.as_p }}
-        <input type="submit" value="Create Product">
+
+        <input type="submit" value="envoyez">
     </form>
+    
 {% endblock %}
 ```
