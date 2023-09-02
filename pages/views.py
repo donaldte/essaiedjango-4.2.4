@@ -42,11 +42,11 @@ def product_detail_view(request):
 
 def product_create_view(request, *args, **kwargs):
     message = ''
-    form = PureProduitForm(request.POST or None)
+    obj = Produit.objects.get(id=1)
+    form = ProduitForm(request.POST or None, instance=obj)
     if form.is_valid():
-        data = form.cleaned_data
-        Produit.objects.create(**data)
-        message = 'donnee enregistrees '
+        form.save()
+        message = 'donnee modifiees avec success '
         form = PureProduitForm()
     return render(request, 'produit/create.html', {'message': message, 'form': form})
 
