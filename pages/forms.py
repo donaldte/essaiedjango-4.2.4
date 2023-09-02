@@ -12,8 +12,8 @@ class ProduitForm(forms.ModelForm):
     description = forms.CharField(required=False, 
                                   widget=forms.Textarea(
                                       attrs={
-                                          "rows": 30, 
-                                          "cols":60, 
+                                          "rows": 10, 
+                                          "cols":70, 
                                           "class": "desc",
                                           "id": "description"
                                           }
@@ -24,7 +24,24 @@ class ProduitForm(forms.ModelForm):
     class Meta:
         model = Produit
         fields = ['nom', 'description', 'prix', 'active', 'live']
+    
+    
+    def clean_nom(self, *args, **kwargs): # def clean_<non_chanp_defini>
+        nom = self.cleaned_data.get('nom')
+        print(nom)
+        if nom != 'dp':
+            raise forms.ValidationError("Le nom du produit doit etre donald")
         
+        return nom 
+    
+    def clean_description(self, *args, **kwargs):
+        description = self.cleaned_data.get('description')
+        if description != "dp":
+            raise forms.ValidationError("description doit etre donald ")
+        
+        return description
+    
+    
         
 class PureProduitForm(forms.Form):
     nom = forms.CharField(required=False,
