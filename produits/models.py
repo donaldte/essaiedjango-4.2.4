@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 
@@ -9,3 +10,13 @@ class Produit(models.Model):
     active      = models.BooleanField(default=True)
     live        = models.BooleanField(default=True)
     is_deleted  = models.BooleanField(null=True)
+    
+    
+    def get_absolute_url_for_detail(self):
+        return reverse("pages:product_detail", kwargs={"my_id": self.pk})
+    
+    # reverse("nom_de_la_vue", kwargs={"variable": self.pk})
+    
+    def get_absolute_url_for_delete(self):
+        return reverse("pages:product_delete", kwargs={"my_id": self.pk})
+    

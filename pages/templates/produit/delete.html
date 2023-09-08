@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2> Delete product page </h2>
+
+<p> etez vous sure de vouloir supprimer le produit {{ obj.nom }} ? </p>
+
+<form method='post'>
+    {% csrf_token %}
+    <input type='submit' value='supprimer'>
+</form>
+{% endblock %}

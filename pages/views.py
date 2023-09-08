@@ -1,18 +1,39 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .forms import ProduitForm, PureProduitForm
 from produits.models import Produit
+from django.http import Http404
+
 # Create your views here.
 def product_detail_view(request, my_id):
-    obj = Produit.objects.get(id=my_id)
+    #obj = Produit.objects.get(id=my_id)
+    # obj = get_object_or_404(Produit, id=my_id)
+    try:
+        obj = Produit.objects.get(id=my_id)
+    except Produit.DoesNotExist:
+        raise Http404
+        
     context = {
         'obj': obj 
     }
     return render(request, 'produit/detail.html', context)
 
 
+def product_delete_view(request, my_id):
+    obj = get_object_or_404(Produit, id=my_id)
+    if request.method == 'POST':
+        obj.delete()
+        return redirect('product_list')
+    
+    return render(request, 'produit/delete.html', {'obj': obj})
 
 
+def product_list_view(request):
+    queryset = Produit.objects.all()
+    context = {
+        'object_list': queryset
+    }
+    return render(request, 'produit/liste.html', context)
 
 
 
