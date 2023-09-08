@@ -6,19 +6,14 @@
     <p> Welcome to product detail page </p>
 
     <div>
-        <ul>
-            {% for obj in objects %}
-            <strong> {{ forloop.counter }} </strong>
+  
+           
             
-            <li>
-                <p> {{ obj.nom }} </p>
-                <p> {{ pbj.description  }} </p>
-                <p> {{ obj.prix  }} </p>
-                <p> {{ obj.active  }} </p>
-            </li>
-
-            {% endfor %}
-        </ul>
+                <p> Nom:  {{ obj.nom }} </p>
+                <p> description: {{ pbj.description  }} </p>
+                <p>Prix:  {{ obj.prix  }} </p>
+                <p>active:  {{ obj.active  }} </p>
+     
     </div>
 {% endblock %}
 ```

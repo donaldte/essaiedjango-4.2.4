@@ -3,12 +3,17 @@ from django.http import HttpResponse
 from .forms import ProduitForm, PureProduitForm
 from produits.models import Produit
 # Create your views here.
-def product_detail_view(request):
-    obj = Produit.objects.all()
+def product_detail_view(request, my_id):
+    obj = Produit.objects.get(id=my_id)
     context = {
-        'objects': obj 
+        'obj': obj 
     }
     return render(request, 'produit/detail.html', context)
+
+
+
+
+
 
 
 # def product_create_view(request):
@@ -85,3 +90,10 @@ def about_view(request, *args, **kwargs): #args, kwargs
 def contact_view(request, *args, **kwargs): #args, kwargs
    
     return render(request, "contact.html")
+
+
+# def product_detail_view(request):
+    
+#     obj = Produit.objects.get(id=1)
+    
+#     return render(request, "produit/detail.html")
