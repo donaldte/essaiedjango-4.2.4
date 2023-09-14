@@ -1,0 +1,8 @@
+<h1> supprimer un cours </h1>
+
+<p> Voulez vous vraiment supprimer le cours {{ object.nom }} ? </p>
+
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Oui, je veux supprimer ce cours" />
+</form>

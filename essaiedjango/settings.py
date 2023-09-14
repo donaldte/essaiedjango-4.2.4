@@ -27,7 +27,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # application > composant
     'produits',
-    'pages'
+    'pages',
+    'cours'
 ]
 
 MIDDLEWARE = [
