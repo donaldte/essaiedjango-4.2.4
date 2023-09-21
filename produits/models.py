@@ -11,6 +11,8 @@ class Produit(models.Model):
     live        = models.BooleanField(default=True)
     is_deleted  = models.BooleanField(null=True)
     
+    def __str__(self):
+        return self.nom
     
     def get_absolute_url_for_detail(self):
         return reverse("pages:product_detail", kwargs={"my_id": self.pk})
