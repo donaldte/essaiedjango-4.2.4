@@ -5,7 +5,7 @@ from .models import Cours, ImageCours
 
 class ImageCoursInline(admin.TabularInline):
     model = ImageCours
- 
+    extra = 1
     
 @admin.register(Cours)
 class AdminCours(admin.ModelAdmin):
@@ -17,3 +17,6 @@ class AdminCours(admin.ModelAdmin):
 
 
 
+# @admin.register(ImageCours)
+# class AdminImageCours(admin.ModelAdmin):
+#     list_display = ['cours', 'image']

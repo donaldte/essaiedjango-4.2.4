@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %} home  {% endblock title %}
+{% block css %} 
+
+{% endblock css %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
 <h1> home page </h1>
+
+<img src="{% static 'image/Pictures/APIs.png' %}" alt="image" width="100%" height="500px" >
+
+
 
 
 {% if liste  %}
