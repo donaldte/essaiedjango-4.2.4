@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     # application > composant
     'produits',
     'pages',
-    'cours'
+    'cours',
+    'tache',
     
 ]
 

@@ -1,0 +1,13 @@
+{% extends 'tache/base.html' %}
+
+
+{% block content %}
+
+<h1> Detail de la tache </h1>
+
+<p> Nom : {{ tache.nom }} </p>
+<p> Description : {{ tache.description }} </p>
+<p> Date de creation : {{ tache.date_creation }} </p>
+<p> Accomplie ou pas : {{ tache.fait }} </p>
+
+{% endblock %}

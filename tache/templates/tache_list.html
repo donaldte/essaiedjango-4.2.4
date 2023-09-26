@@ -1,0 +1,30 @@
+{% extends 'tache/base.html' %}
+
+{% block content %}
+
+
+<table border="1">
+    <th>Nom tache </th>
+    <th>Etat tache </th>
+    <th> Date de creation </th>
+    <th> Action </th>
+
+    {% for tache in taches %}
+
+    <tr>
+        <td>{{ tache.nom }}</td>
+        <td>{{ tache.fait }}</td>
+        <td>{{ tache.date_creation }}</td>
+        <td>
+            <a href="{{ tache.get_absolute_url }}"> detail </a>
+            <a href="{{ tache.get_absolute_url_update }}"> modifier </a>
+            <a href="#"> supprimer </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+
+{% endblock %}
