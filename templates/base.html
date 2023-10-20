@@ -13,7 +13,29 @@
 </head>
 <body>
 
-    <h2>{{ request.user }}</h2>
+   
+    <nav>
+        <ul>
+            <li><a href="">Home</a></li>
+            
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'compte:logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="{% url 'compte:login' %}">Login</a></li>
+            <li><a href="{% url 'compte:register' %}">Register</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+
+    {% if messages %}
+
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+    {% endif %}
     
    
 

@@ -1,5 +1,6 @@
 
 from pathlib import Path
+from decouple import config
 import os # pour les chemins absolus
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,13 +11,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-+5m12(sdfsdmfglz*m0f%w6z4ll45jbzinhe48o(@b$&o6gu$p)7&xa'
 
-SERCRET_KEY_TWO=os.get_env('SECRET_KEY_TWO')
-
+LOGIN_URL = 'compte:login'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Email settings
+EMAIL_HOST=config('EMAIL_HOST')
+EMAIL_PORT=config('EMAIL_PORT', cast=int)
+EMAIL_USE_TLS=config('EMAIL_USE_TLS', cast=bool)
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')
 
 # Application definition
 
@@ -27,13 +33,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # library
+    "django_bootstrap5",
     # application > composant
     'produits',
     'pages',
     'cours',
     'tache',
+    'compte',
     
 ]
+
+# obligatoire 
+
+AUTH_USER_MODEL = 'compte.User'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

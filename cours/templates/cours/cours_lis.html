@@ -1,6 +1,18 @@
-<h1> cours liste </h1>
+{% extends 'cours/base.html' %}
+{% load custom_filters %}
 
-{% for cours in object_list %}
-    <p> {{ cours.nom}} </p>
+{% block content %}
+
+<h1 class='text-center '> cours liste </h1>
+
+<div class='container'>
+
+    {% for cours in object_list %}
+
+    <p> {{ cours.nom|upper_case  }} : {{50|multiply:10}} </p>
+
 <hr>
 {% endfor %}
+
+</div>    
+{% endblock %}

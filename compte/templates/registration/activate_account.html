@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+Email d'activation de compte 
+
+ Bonjour, {{ user }}
+
+ Veuillez cliquer sur le lien ci-dessous pour activer votre compte 
+
+ lien: http://{{domain}}{% url 'compte:password_reset' uidb64=uid token=token %}
+
+
+{% endautoescape %}

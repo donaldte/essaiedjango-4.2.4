@@ -7,8 +7,14 @@ from django.views.generic import (
     CreateView, 
     DeleteView
 )
+from django.contrib.auth.decorators import login_required, permission_required
+
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import Permission
 from .models import Cours
 from .forms import CoursForm
+
+from compte.permissions import group_required, role_required, GroupRequiredMixin, RoleRequiredMixin
 # class based view 
 
 from django.views import View 
@@ -23,7 +29,12 @@ class CoursViewMixin(object):
         return obj
 
 
-class FCourseListView(View):
+class FCourseListView(LoginRequiredMixin, RoleRequiredMixin,  View):
+    
+   
+    
+    roles = ['is_professor']
+    
     template_name = 'cours/cours_lis.html'
     def get(self, request,  *args, **kwargs):
         queryset = Cours.objects.all()
@@ -126,11 +137,21 @@ class CouseUpdateView(UpdateView):
     queryset = Cours.objects.all()    
     
 
-class CourseDeleteView(DeleteView):
+class CourseDeleteView(PermissionRequiredMixin, DeleteView):
+    permission_required = 'cours.delete_cours'
     template_name = 'cours/cours_delete.html'
     queryset = Cours.objects.all() 
     
     
     def get_success_url(self):
         return reverse("cours:cours-list")
-       
+
+@role_required(['is_professor'])
+
+@group_required('professor')
+def list_view(request):
+    queryset = Cours.objects.all()
+    context = {
+        'object_list': queryset
+    }
+    return render(request, 'cours/cours_lis.html', context)       
