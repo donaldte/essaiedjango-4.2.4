@@ -89,7 +89,7 @@ def user_registration_view(request, *args, **kwargs):
             
             messages.success(request, "Votre compte a été créé avec succès.")        
            
-    
+            return redirect('compte:login')   
     
     return render(request, 'registration/register.html', {})
 
@@ -145,6 +145,7 @@ def user_login_view(request, *args, **kwargs):
                     if next:
                         return redirect(next)
                     
+                    return redirect('cours:cours-list')
                 else:
                     
                     messages.error(request, "Le nom d'utilisateur ou le mot de passe est incorrect.")
@@ -180,7 +181,7 @@ user.save()
 def logout_view(request, *args, **kwargs):
     
     user = request.user
-    
+    print(user)
     # if user.has_perm('compte.view_user_info'):
         
     #     print("User can view user info")

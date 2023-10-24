@@ -108,7 +108,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         
     #     return True   
     
-    
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email = models.EmailField(_("email address"), unique=True,  blank=True)    
 
 class CustomPermission(models.Model):
     
@@ -138,3 +141,4 @@ class CustomPermission(models.Model):
               ('view_language', 'Can view language'),
               
        )
+       
