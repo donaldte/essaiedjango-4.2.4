@@ -81,7 +81,7 @@ def user_registration_view(request, *args, **kwargs):
                 'token': token,
             }
             
-            send_email_with_template(subject, template_name, context, [to_email], from_email)
+            send_email_with_template.delay(subject, template_name, context, [to_email], from_email)
             
             
             

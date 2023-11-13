@@ -155,3 +155,21 @@ def list_view(request):
         'object_list': queryset
     }
     return render(request, 'cours/cours_lis.html', context)       
+
+
+from .tasks import add, create_cours_for_testing
+
+def test_task(request):
+
+    result = create_cours_for_testing.delay()
+
+    return render(request, 'cours/test_task.html', {'result': result})
+
+
+
+def test_task_result(request, task_id):
+    result = create_cours_for_testing.AsyncResult(task_id)
+
+    if result.ready():
+        return render(request, 'cours/test_task_result.html', {'result': result.result})
+    return render(request, 'cours/test_task_result.html', {'result': "result not ready yet"})
