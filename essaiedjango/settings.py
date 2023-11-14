@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'cours',
     'tache',
     'compte',
+    'sig',
     
 ]
 
